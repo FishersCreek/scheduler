@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css" integrity="sha512-xiunq9hpKsIcz42zt0o2vCo34xV0j6Ny8hgEylN3XBglZDtTZ2nwnqF/Z/TTCc18sGdvCjbFInNd++6q3J0N6g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+      html {
+        font-size: 43.5%;
+      }
+      body {
+        /* line-height: ; */
+      }
+
+      .mt-2 {
+        margin-top: 2rem;
+      }
+
+    </style>
+  </head>
+  <body>
+    <main>
+      
+      <!--WhatsApp API configuration -->
+      <section class="container">
+        <div class="row mt-2">
+          <h4>WhatsApp API Config</h4>
+        </div>
+        
+        <form>
+          <fieldset>
+            <label for="whatsapp-key" class="form-label">API key</label>
+            <input type="password" class="form-control" id="whatsapp-key" required>
+          </fieldset>
+          <fieldset>
+            <label for="whatsapp-phone-id" class="form-label">API phone ID</label>
+            <input type="text" class="form-control" id="whatsapp-phone-id" required>
+          </fieldset>
+
+          <button type="submit" class="button" onclick="updateWhatsAppProps">Update</button>
+        </form>
+      </section>
+      <hr/>
+
+      <!--Manual Triggers -->
+      <section class="container">
+        <div class="row mt-2">
+          <h4>Manual Trigger</h4>
+        </div>
+        
+        <button type="button" class="button" onclick="sendAlertsManually">Send alerts</button>
+      </section>
+
+    </main>
+    <script>
+      function updateWhatsAppProps() {
+        const whatsappKeyInput = document.getElementById("whatsapp-key");
+        const newWhatsAppKey = whatsappKeyInput.value;
+        if(newWhatsAppKey){
+          google.script.run.saveWhatsAppKey(newWhatsAppKey);
+        } else {
+          document.alert("WhatsApp key is empty");
+        }
+
+        const whatsappPhoneIdInput = document.getElementById("whatsapp-phone-id");
+        const newWhatsAppPhoneId = whatsappPhoneIdInput.value;
+        if(newWhatsAppPhoneId){
+          google.script.run.saveWhatsAppPhoneId(newWhatsAppPhoneId);
+        } else {
+          document.alert("WhatsApp phone ID is empty");
+        }
+      }
+
+      function sendAlertsManually() {
+        const whatsappKey = google.script.run.getWhatsAppKey();
+        if(!whatsappKey){
+          document.alert("No WhatsApp key submitted yet");
+        }
+
+        const whatsappPhoneId = google.script.run.getWhatsAppPhoneId();
+        if(!whatsappPhoneId){
+          document.alert("No WhatsApp phone ID submutted yet");
+        }
+
+        google.script.run.main();
+      }
+
+      // update the form inputs from the data in the backend
+      (() => {
+        'use strict'
+
+        const whatsappKey = google.script.run.getWhatsAppKey();
+        if(whatsappKey){
+          document.getElementById("whatsapp-key").value = whatsappKey;
+        }
+
+        const whatsappPhoneId = google.script.run.getWhatsAppPhoneId();
+        if(whatsappPhoneId){
+          document.getElementById("whatsapp-phone-id").value = whatsappPhoneId;
+        }
+      })()
+    </script>
+  </body>
+</html>
