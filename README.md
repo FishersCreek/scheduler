@@ -19,4 +19,5 @@ You however have to upload it to [Google Sheets](https://docs.google.com/spreads
 
 Access to the [WhatsApp Business Platform API](https://business.whatsapp.com/developers/developer-hub/), as you will need an API key and a phone number ID.
 
-\*\*NOTE: You will need to also create the "ministry_reminder" template message in the WhatsApp API dashboard. See [these instructions](https://www.facebook.com/business/help/2055875911147364?id=2129163877102343)
+**NOTE: You will need to also create the "ministry_reminder" template message in the WhatsApp API dashboard. See [these instructions](https://www.facebook.com/business/help/2055875911147364?id=2129163877102343)**  
+**NOTE: Your API key needs to be permanent. The default one supplied is for short sessions. [Here](https://developers.facebook.com/docs/whatsapp/business-management-api/get-started#1--acquire-an-access-token-using-a-system-user-or-facebook-login) are the instructions.**.
