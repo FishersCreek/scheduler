@@ -58,21 +58,65 @@ function sendWhatsAppMsg(person) {
 
   const url = `https://graph.facebook.com/v21.0/${phoneNumberId}/messages`;
   const headers = {
-    "Content-Type": "application/json",
     Authorization: `Bearer ${apiKey}`,
   };
-
-  const body = JSON.stringify({
+  const method = "post";
+  const contentType = "application/json";
+  const payload = JSON.stringify({
     messaging_product: "whatsapp",
-    recipient_type: "individual",
     to: person.phone,
-    type: "text",
-    text: {
-      body: createMsgText(person),
+    type: "template",
+    template: {
+      name: "ministry_reminder",
+      language: {
+        code: "en_US",
+      },
+      components: [
+        {
+          type: "header",
+          parameters: [
+            {
+              type: "text",
+              paramter_name: "role",
+              text: person.role,
+            },
+          ],
+        },
+        {
+          type: "body",
+          parameters: [
+            {
+              type: "text",
+              paramter_name: "name",
+              text: person.name,
+            },
+            {
+              type: "text",
+              parameter_name: "role",
+              text: person.role,
+            },
+            {
+              type: "text",
+              parameter_name: "date",
+              text: person.date,
+            },
+            {
+              type: "text",
+              parameter_name: "topic",
+              text: person.topic,
+            },
+          ],
+        },
+      ],
     },
   });
 
-  const response = UrlFetchApp.fetch(url, { method: "post", headers, body });
+  const response = UrlFetchApp.fetch(url, {
+    method,
+    contentType,
+    headers,
+    payload,
+  });
   if (response.getResponseCode() != 200) {
     throw new Error(`Fetch failed with ${response.getContentText()}`);
   }
@@ -81,39 +125,32 @@ function sendWhatsAppMsg(person) {
 /**
  * Sends email message to the person
  * @param {Person} person - the person to send the email to
- * @param {string} subject - the subject of the email; default "You Signed up for Fisher's Creek Ministry"
  */
-function sendEmailMsg(
-  person,
-  subject = "You Signed up for Fisher's Creek Ministry"
-) {
+function sendEmailMsg(person) {
   if (!person.email) {
     throw new Error(`person ${person.name} has an empty email address`);
   }
 
+  const subject = `[Reminder] You will be leading the ${person.role} at Fishers Creek on ${person.date}`;
+  const body = `
+  Hi ${person.name},
+
+  This an automated reminder.
+
+  You signed up for ${person.role} on ${person.date}.
+  The Topic of the Sunday is '${person.topic}'.
+  May the LORD guide you.
+  Thank you 🙏.
+
+  Best wishes,
+  Fishers Creek
+  `;
+
   MailApp.sendEmail({
     to: person.email,
     subject,
-    body: createMsgText(person),
+    body,
   });
-}
-
-/**
- * Creates a message text for the given person
- * @param {Person} person - the person to be contacted
- *
- * @returns {string}
- */
-function createMsgText(person) {
-  return `
-  Hi ${person.name},
-
-  Reminder: You signed up for ${person.role} this Sunday ${person.date}
-  Sunday topic: ${person.topic}
-  Thank you &#128591;
-
-  (Psst: please don't reply. This is an automated alert.)
-  `;
 }
 
 /**
@@ -239,6 +276,21 @@ function extraDateText(cellValue) {
   return cellValue instanceof Date
     ? toISODateString(cellValue)
     : extraText(cellValue);
+}
+
+/**
+ * Run the callback with an error handler
+ * @param {Function} cb - the function to enclose in the error handler
+ * @param {...*} args - arguments to be passed to the callback
+ *
+ * @return {any}
+ */
+function handleError(cb, ...args) {
+  try {
+    return cb(...args);
+  } catch (err) {
+    Logger.log(err);
+  }
 }
 
 /**
