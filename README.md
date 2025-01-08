@@ -43,14 +43,16 @@ This is the Google App Script code for the schedule manager for Fisher's Creek C
 
 - Create the following files by clicking the `+` on in the `Files` section:
 
+  ![Add files in the apps scripts editor](./docs/img/add-files-in-apps-script-editor.png)
+
   - `main.gs`
   - `sidebar.html`
   - `ui.gs`
   - `utils.gs`
 
-    ![Add files in the apps scripts editor](./docs/img/add-files-in-apps-script-editor.png)
-
 - Copy and paste the contents of the following files from this repository to the corresponding file in the 'Apps Scripts' editor.
+
+  ![Copy-paste repository contents to apps scripts editor](./docs/img/copy-paste-file-contents.png)
 
   - `main.gs`
   - `sidebar.html`
@@ -58,8 +60,6 @@ This is the Google App Script code for the schedule manager for Fisher's Creek C
   - `utils.gs`
 
     **Make sure you save (i.e Ctrl-S) after every paste**
-
-    ![Copy-paste repository contents to apps scripts editor](./docs/img/copy-paste-file-contents.png)
 
 - Open the triggers screen in the 'Apps Scripts' editor.
 
@@ -79,13 +79,13 @@ This is the Google App Script code for the schedule manager for Fisher's Creek C
 
 - Select 'main' function.
 
+  ![Add the weekly trigger for the main function](./docs/img/add-the-main-trigger.png)
+
   - Select the 'Time-driven' event source
   - Select the 'Week timer' trigger type
   - Select 'Every Monday' in the day of week
   - Click 'Save'
   - Click through any authorizations that follow.
-
-    ![Add the weekly trigger for the main function](./docs/img/add-the-main-trigger.png)
 
 - Reload your Google sheet. A new menu section 'Fishers creek' must be visible.
 
