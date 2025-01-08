@@ -77,7 +77,7 @@ function sendWhatsAppMsg(person) {
           parameters: [
             {
               type: "text",
-              paramter_name: "role",
+              parameter_name: "role",
               text: person.role,
             },
           ],
@@ -87,7 +87,7 @@ function sendWhatsAppMsg(person) {
           parameters: [
             {
               type: "text",
-              paramter_name: "name",
+              parameter_name: "name",
               text: person.name,
             },
             {
