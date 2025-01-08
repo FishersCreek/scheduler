@@ -103,9 +103,9 @@ This is the Google App Script code for the schedule manager for Fisher's Creek C
   - [Access tokens / API keys](https://developers.facebook.com/docs/whatsapp/business-management-api/get-started#system-users)
   - [Message templates](https://developers.facebook.com/docs/whatsapp/message-templates/guidelines)
 
-<!-- ## License
+## License
 
-Licensed under the [MIT License](LICENSE)-->
+Licensed under the [MIT License](LICENSE)
 
 ## Acknowledgements
 
