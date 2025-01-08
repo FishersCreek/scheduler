@@ -1,4 +1,4 @@
-# FisherCreek Scheduler
+# FishersCreek Scheduler
 
 This is the Google App Script code for the schedule manager for Fisher's Creek Church, Gothenburg Sweden.
 
@@ -14,7 +14,7 @@ This is the Google App Script code for the schedule manager for Fisher's Creek C
 
 - Download and extract this repository.
 
-    <!-- ![Download repository](./docs/img/download-repo.png) -->
+  ![Download repository](./docs/img/download-repo.png)
 
 - Create a [Gmail account](https://mail.google.com/) if you have not yet already.
 - Create a new blank [Google sheet](https://docs.google.com/spreadsheets)
