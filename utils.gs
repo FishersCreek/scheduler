@@ -164,7 +164,7 @@ function sendBatchEmailMsg(persons) {
     .join(",");
   const date = persons[0]?.date;
   const topic = persons[0]?.topic;
-  const namesAndRoles = persons.map((v) => `${v.name} - ${v.role}`).join("\n");
+  const namesAndRoles = persons.map((v) => `\t${v.name} - ${v.role}`).join("\n");
 
   const subject = `Sunday service ${date} team`;
   const body = `
