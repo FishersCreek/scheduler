@@ -154,6 +154,42 @@ function sendEmailMsg(person) {
 }
 
 /**
+ * Sends a batch email message to the people
+ * @param {Person[]} persons - the persons to send the email to
+ */
+function sendBatchEmailMsg(persons) {
+  const emails = persons
+    .map((v) => v.email)
+    .filter((v) => !!v)
+    .join(",");
+  const date = persons[0]?.date;
+  const topic = persons[0]?.topic;
+  const namesAndRoles = persons.map((v) => `${v.name} - ${v.role}`).join("\n");
+
+  const subject = `Sunday service ${date} team`;
+  const body = `
+  Hellos,
+
+  Here is the team for ${date} Sunday service:
+
+  ${namesAndRoles}
+
+  Topic: '${topic}'.
+  May the LORD guide you.
+  Thank you 🙏.
+
+  Best wishes,
+  Fishers Creek
+  `;
+
+  MailApp.sendEmail({
+    to: emails,
+    subject,
+    body,
+  });
+}
+
+/**
  * Get the current user's WhatsApp phone ID from user properties
  *
  * @returns {string | undefined}

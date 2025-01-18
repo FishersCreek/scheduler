@@ -4,8 +4,9 @@ function main() {
   const nextSunday = getNextSundayDate(today);
   const yearSheet = getYearSheet(nextSunday);
   const people = getWeeksIncharges(yearSheet, nextSunday);
+  handleError(sendBatchEmailMsg(people));
+
   people.forEach((person) => {
-    handleError(sendEmailMsg, person);
     handleError(sendWhatsAppMsg, person);
   });
 }
